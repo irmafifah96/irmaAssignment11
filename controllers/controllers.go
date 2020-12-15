@@ -53,7 +53,23 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 
 	if request.Name == "" {
 		response.Code = "02"
-		response.Message = "Request tidak sesuai"
+		response.Message = "Request tidak sesuai, Name Harus Diisi"
+		jsonRes, _ := json.Marshal(response)
+		w.Write(jsonRes)
+		return
+	}
+
+	if request.Age == "" {
+		response.Code = "02"
+		response.Message = "Request tidak sesuai, Age Harus Diisi"
+		jsonRes, _ := json.Marshal(response)
+		w.Write(jsonRes)
+		return
+	}
+
+	if request.Email == "" {
+		response.Code = "02"
+		response.Message = "Request tidak sesuai, Email Harus Diisi"
 		jsonRes, _ := json.Marshal(response)
 		w.Write(jsonRes)
 		return
@@ -91,6 +107,12 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 		}
 		insForm.Exec(name, age, email, password, gender, role)
 		log.Println("Insert Data: name " + name + " | age " + age + " | email " + email + " | gender " + gender + " | role " + role)
+
+		response.Code = "00"
+		response.Message = "Berhasil"
+		jsonRes, _ := json.Marshal(response)
+		w.Write(jsonRes)
+		return
 	}
 	defer db.Close()
 	http.Redirect(w, r, "/", 301)

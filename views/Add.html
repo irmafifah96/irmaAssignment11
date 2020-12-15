@@ -52,7 +52,11 @@
         contentType: 'application/json',
       }).then(function (res) {
         var data = JSON.parse(res)
-        alert(data.message);
+        if (data.code == "00") {
+          window.location.href = "http://localhost:9000/";
+        } else {
+          alert(data.message);
+        }
       }).catch(function (a) {
         alert("ERROR: " + a.responseText);
       });
