@@ -134,7 +134,6 @@ func EditUser(w http.ResponseWriter, r *http.Request) {
 		gender := r.FormValue("gender")
 		role := r.FormValue("role")
 		id := r.FormValue("id")
-		fmt.Println(id)
 		insForm, err := db.Prepare("UPDATE users SET name=?, age=?, email=?, gender=?, role=? WHERE id=?")
 		if err != nil {
 			panic(err.Error())
@@ -212,7 +211,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err.Error())
 		}
-		log.Println("Listing Row: Id " + id + " | name " + name + " | age " + age + " | email " + email + " | gender " + gender + " | role " + role)
+		//log.Println("Listing Row: Id " + id + " | name " + name + " | age " + age + " | email " + email + " | gender " + gender + " | role " + role)
 
 		user.Id = id
 		user.Name = name
